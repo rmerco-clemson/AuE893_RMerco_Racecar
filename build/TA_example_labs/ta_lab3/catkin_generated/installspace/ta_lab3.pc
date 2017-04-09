@@ -1,0 +1,8 @@
+prefix=/home/rmerco/racecarSim/install
+
+Name: ta_lab3
+Description: Description of ta_lab3
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/rmerco/racecarSim/install/lib 
+Requires: 

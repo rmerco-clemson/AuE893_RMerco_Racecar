@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="ta_lab3" type="wall_follow_F110_RM.py" name="Wall_Following_Controller" />
+</launch>

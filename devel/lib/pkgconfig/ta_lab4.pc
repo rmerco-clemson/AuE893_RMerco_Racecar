@@ -1,0 +1,8 @@
+prefix=/home/rmerco/racecarSim/devel
+
+Name: ta_lab4
+Description: Description of ta_lab4
+Version: 0.0.0
+Cflags: -I/home/rmerco/racecarSim/devel/include
+Libs: -L/home/rmerco/racecarSim/devel/lib 
+Requires: message_runtime rospy sensor_msgs std_msgs

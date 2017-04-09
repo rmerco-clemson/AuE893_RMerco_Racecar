@@ -1,0 +1,2 @@
+TA_example_labs/ta_lab3:TA_example_labs/ta_lab4:ackermann_msgs:racecar-simulator/racecar_control:racecar-simulator/racecar_description:racecar-simulator/racecar_gazebo:racecar/ackermann_cmd_mux:racecar/racecar:serial:vesc/vesc:vesc/vesc_ackermann:vesc/vesc_driver:vesc/vesc_msgs
+-DCATKIN_DEVEL_PREFIX=/home/rmerco/racecarSim/devel -DCMAKE_INSTALL_PREFIX=/home/rmerco/racecarSim/install -G Unix Makefiles

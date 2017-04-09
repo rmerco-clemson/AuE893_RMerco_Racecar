@@ -1,0 +1,8 @@
+prefix=/home/rmerco/racecarSim/devel
+
+Name: serial
+Description: Description of serial
+Version: 1.2.1
+Cflags: -I/home/rmerco/racecarSim/src/serial/include
+Libs: -L/home/rmerco/racecarSim/devel/lib -lserial
+Requires: 

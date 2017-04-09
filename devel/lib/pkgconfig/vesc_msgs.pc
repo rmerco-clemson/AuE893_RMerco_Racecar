@@ -1,0 +1,8 @@
+prefix=/home/rmerco/racecarSim/devel
+
+Name: vesc_msgs
+Description: Description of vesc_msgs
+Version: 0.0.1
+Cflags: -I/home/rmerco/racecarSim/devel/include
+Libs: -L/home/rmerco/racecarSim/devel/lib 
+Requires: std_msgs message_runtime
