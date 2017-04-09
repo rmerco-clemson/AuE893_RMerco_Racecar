@@ -384,7 +384,7 @@ class WallFollow():
 
             # identify the minimum distance for each sector
             # added to wanderer: left minimum distance sensed            
-            if (entries*2/10 < entry < entries*4/10):
+            if (entries*2/10 < entry < entries*5/10):
                 if (msg.ranges[entry] < self.sect_right):
                     self.sect_right = msg.ranges[entry]
 
@@ -394,7 +394,7 @@ class WallFollow():
                     self.sect_center = msg.ranges[entry]
 
             # right minimum distance sensed
-            if (entries*6/10 < entry < entries*8/10):
+            if (entries*5/10 < entry < entries*8/10):
                 if (msg.ranges[entry] < self.sect_left):
                     self.sect_left = msg.ranges[entry]
         

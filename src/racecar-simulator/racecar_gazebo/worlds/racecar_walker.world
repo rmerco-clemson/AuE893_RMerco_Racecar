@@ -146,7 +146,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/chassis.STL</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/chassis.STL</uri>
             </mesh>
           </geometry>
           <material>
@@ -161,7 +161,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/hokuyo.dae</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/hokuyo.dae</uri>
             </mesh>
           </geometry>
           <material>
@@ -305,7 +305,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/left_rear_wheel.STL</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/left_rear_wheel.STL</uri>
             </mesh>
           </geometry>
           <material>
@@ -355,7 +355,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/left_steering_hinge.STL</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/left_steering_hinge.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -429,7 +429,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/left_front_wheel.STL</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/left_front_wheel.STL</uri>
             </mesh>
           </geometry>
           <material>
@@ -508,7 +508,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/right_rear_wheel.STL</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/right_rear_wheel.STL</uri>
             </mesh>
           </geometry>
           <material>
@@ -558,7 +558,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/right_steering_hinge.STL</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/right_steering_hinge.STL</uri>
             </mesh>
           </geometry>
         </visual>
@@ -630,7 +630,7 @@
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>/home/rmerco/racecar_ws/src/racecar-simulator/racecar_description/meshes/right_front_wheel.STL</uri>
+              <uri>/home/rmerco/racecarSim/src/racecar-simulator/racecar_description/meshes/right_front_wheel.STL</uri>
             </mesh>
           </geometry>
           <material>
@@ -669,7 +669,7 @@
       <pose frame=''>0 0 0.05 0 -0 0</pose>
     </model>
     <model name='unit_box_0'>
-      <pose frame=''>-2.46931 8.48349 0.5 0 -0 0</pose>
+      <pose frame=''>-2.50779 8.38599 0.5 0 -0 0</pose>
       <link name='link'>
         <inertial>
           <mass>1</mass>
@@ -685,7 +685,7 @@
         <collision name='collision'>
           <geometry>
             <box>
-              <size>1 1 1</size>
+              <size>1 0.80236 1</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -705,7 +705,7 @@
         <visual name='visual'>
           <geometry>
             <box>
-              <size>1 1 1</size>
+              <size>1 0.80236 1</size>
             </box>
           </geometry>
           <material>
@@ -721,7 +721,7 @@
       </link>
     </model>
     <model name='unit_box_1'>
-      <pose frame=''>-7.86889 3.13486 0.5 0 -0 0</pose>
+      <pose frame=''>-7.65225 3.20668 0.5 0 -0 0</pose>
       <link name='link'>
         <inertial>
           <mass>1</mass>
@@ -737,7 +737,7 @@
         <collision name='collision'>
           <geometry>
             <box>
-              <size>1 1 1</size>
+              <size>1 0.911619 1</size>
             </box>
           </geometry>
           <max_contacts>10</max_contacts>
@@ -757,7 +757,7 @@
         <visual name='visual'>
           <geometry>
             <box>
-              <size>1 1 1</size>
+              <size>1 0.911619 1</size>
             </box>
           </geometry>
           <material>
@@ -773,74 +773,74 @@
       </link>
     </model>
     <state world_name='racecar_walker'>
-      <sim_time>672 953000000</sim_time>
-      <real_time>203 875177479</real_time>
-      <wall_time>1491777755 641158106</wall_time>
-      <iterations>179125</iterations>
+      <sim_time>69 530000000</sim_time>
+      <real_time>79 574112312</real_time>
+      <wall_time>1491781544 937358155</wall_time>
+      <iterations>69530</iterations>
       <model name='racecar'>
-        <pose frame=''>-0.665306 0.360502 -0.141748 -1e-06 2e-06 0.035714</pose>
+        <pose frame=''>0.000119 1e-06 -0.141748 -1e-06 2e-06 -7.3e-05</pose>
         <scale>1 1 1</scale>
         <link name='base_link'>
-          <pose frame=''>-0.665306 0.360502 -0.141748 -1e-06 2e-06 0.035714</pose>
-          <velocity>3e-06 1e-06 7e-06 1e-06 -5e-06 -1e-06</velocity>
-          <acceleration>0 0 0 -0.000677 -0.002622 -1.7e-05</acceleration>
+          <pose frame=''>0.000119 1e-06 -0.141748 -1e-06 2e-06 -7.3e-05</pose>
+          <velocity>0 1e-06 7e-06 1e-06 -6e-06 -1e-06</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='left_front_wheel'>
-          <pose frame=''>-0.344083 0.472043 -0.091748 -1.57085 1.24727 -3.09378</pose>
-          <velocity>3e-06 2e-06 7e-06 -5.1e-05 0.000136 -0.000225</velocity>
-          <acceleration>0 0 0 0.003068 -0.064046 7e-06</acceleration>
+          <pose frame=''>0.325126 0.099977 -0.091748 -1.57814 1.56799 3.13352</pose>
+          <velocity>0 3e-06 7e-06 -5e-05 0 -1.1e-05</velocity>
+          <acceleration>0 0 0 -2e-06 -0.00261 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='left_rear_wheel'>
-          <pose frame=''>-0.668876 0.460439 -0.091748 1.5708 -0.164927 0.035714</pose>
-          <velocity>3e-06 0 7e-06 -1e-05 7.4e-05 -1e-06</velocity>
-          <acceleration>0 0 0 0.002548 -0.071312 0</acceleration>
+          <pose frame=''>0.000126 0.100001 -0.091748 1.5708 0.002547 -7.3e-05</pose>
+          <velocity>0 0 7e-06 -8e-06 -5e-06 0</velocity>
+          <acceleration>0 0 0 0 -0.000445 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='left_steering_hinge'>
-          <pose frame=''>-0.344083 0.472043 -0.091749 1.78672 1.57076 1.83459</pose>
-          <velocity>3e-06 2e-06 8e-06 -0.000117 -1.1e-05 -0.000225</velocity>
-          <acceleration>0 0 0 0 -0 4e-06</acceleration>
+          <pose frame=''>0.325126 0.099977 -0.091749 1.78704 1.57076 1.78631</pose>
+          <velocity>0 2e-06 8e-06 -0.000131 -6e-06 -1.1e-05</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='right_front_wheel'>
-          <pose frame=''>-0.336943 0.272171 -0.091748 -1.57078 0.248806 -3.07279</pose>
-          <velocity>3e-06 -2e-06 8e-06 6.3e-05 -0.000217 -0.000512</velocity>
-          <acceleration>0 0 0 -0.006603 0.095821 1.3e-05</acceleration>
+          <pose frame=''>0.325111 -0.100022 -0.091749 1.48171 1.57053 -0.090416</pose>
+          <velocity>-1e-06 -3e-06 8e-06 5.2e-05 -1.4e-05 -3e-06</velocity>
+          <acceleration>0 0 0 5e-06 0.003527 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='right_rear_wheel'>
-          <pose frame=''>-0.661735 0.260566 -0.091748 1.5708 -0.206903 0.035713</pose>
-          <velocity>2e-06 1e-06 6e-06 -1.2e-05 7.2e-05 -2e-06</velocity>
-          <acceleration>0 0 0 0.002476 -0.069297 0</acceleration>
+          <pose frame=''>0.000111 -0.099999 -0.091748 1.5708 0.002177 -7.3e-05</pose>
+          <velocity>-1e-06 1e-06 6e-06 -1e-05 -1.5e-05 0</velocity>
+          <acceleration>0 0 0 1e-06 0.007675 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
         <link name='right_steering_hinge'>
-          <pose frame=''>-0.336942 0.272171 -0.091749 2.26517 1.57078 2.33397</pose>
-          <velocity>2e-06 1e-06 8e-06 -3.5e-05 -8e-06 -0.000512</velocity>
-          <acceleration>0 0 0 0 -0 7e-06</acceleration>
+          <pose frame=''>0.325111 -0.100022 -0.091749 2.31127 1.57078 2.30994</pose>
+          <velocity>-1e-06 1e-06 8e-06 -3.8e-05 -6e-06 -3e-06</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='unit_box_0'>
-        <pose frame=''>-2.44613 8.46055 0.358253 0 -0 0.841433</pose>
-        <scale>1 1.24562 1</scale>
+        <pose frame=''>-2.50779 8.38599 0.358253 0 -0 0.792828</pose>
+        <scale>1 1.24632 1</scale>
         <link name='link'>
-          <pose frame=''>-2.44613 8.46055 0.358253 0 -0 0.841433</pose>
+          <pose frame=''>-2.50779 8.38599 0.358253 0 -0 0.792828</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='unit_box_1'>
-        <pose frame=''>-7.54324 3.28815 0.422404 -0.031888 0.093411 0.471712</pose>
-        <scale>1 1.2792 1</scale>
+        <pose frame=''>-7.66725 3.25205 0.358253 0 -0 0.505674</pose>
+        <scale>1 1.09695 1</scale>
         <link name='link'>
-          <pose frame=''>-7.54324 3.28815 0.422404 -0.031888 0.093411 0.471712</pose>
+          <pose frame=''>-7.66725 3.25205 0.358253 0 -0 0.505674</pose>
           <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>-0.000225 7.7e-05 6e-05 1.8e-05 7e-06 -7.1e-05</acceleration>
-          <wrench>-0.000225 7.7e-05 6e-05 0 -0 0</wrench>
+          <acceleration>5e-06 -1e-06 -3e-06 3e-06 1e-05 0</acceleration>
+          <wrench>5e-06 -1e-06 -3e-06 0 -0 0</wrench>
         </link>
       </model>
       <model name='walker_racecourse'>
@@ -862,7 +862,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>1.2341 2.26531 5.87885 -0.390071 1.56038 2.74625</pose>
+        <pose frame=''>1.01808 0.341304 10.1476 -0.391735 1.56698 2.74793</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
