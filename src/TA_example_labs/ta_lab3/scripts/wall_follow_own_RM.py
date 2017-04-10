@@ -21,7 +21,7 @@ MEDIAN_FILTER_SIZE=141
 KP = 0.4 # distance term
 KD = 0.12  # angle term
 KSPEED_steer = 0 #3.5 # proportional speed to steer
-KSPEED_front = 2.5 # proportional speed to front distance
+KSPEED_front = 0.9 # proportional speed to front distance
 # KD = 0.5  # angle term
 PUBLISH_LINE = True
 HISTORY_SIZE = 5 # Size of the circular array for smoothing steering commands
@@ -254,15 +254,16 @@ class WallFollow():
 
             # control proportional to the steer effort in order to decrease/increase the SPEED
             # controlSPEED = np.clip(- math.fabs(wall_dist - TARGET_DISTANCE) * KSPEED_steer + self.meanRanges * KSPEED_front, 0.4, 3)
-            if self.meanRanges <= 0.3:
-                controlSPEED = 0
-            elif self.meanRanges > 0.3 and self.meanRanges < 0.7:
-                controlSPEED = 1
-            elif self.meanRanges > 0.7 and self.meanRanges < 1.5:
-                controlSPEED = 1.7
-            elif self.meanRanges >= 1.5 and self.meanRanges < 2.2:
-                controlSPEED = 2.5
-            else: controlSPEED = 4
+            controlSPEED = np.clip(self.sect_center * KSPEED_front, 0.4, 2.5)
+            # if self.sect_center <= 0.3:
+            #     controlSPEED = 0
+            # elif self.sect_center > 0.3 and self.sect_center < 0.7:
+            #     controlSPEED = 1
+            # elif self.sect_center > 0.7 and self.sect_center < 1.5:
+            #     controlSPEED = 1.7
+            # elif self.sect_center >= 1.5 and self.sect_center < 2.2:
+            #     controlSPEED = 2.5
+            # else: controlSPEED = 4
 
 
             # Calculate error for PD
@@ -281,7 +282,7 @@ class WallFollow():
             self.last_errorS = errorS    
 
             # avoid turning too sharply
-            self.control = (np.clip(control, -0.4, 0.4), SPEED)
+            self.control = (np.clip(control, -0.4, 0.4), controlSPEED)
 
     def fit_line(self):
         if self.received_data and self.xs.shape[0] > 0:
