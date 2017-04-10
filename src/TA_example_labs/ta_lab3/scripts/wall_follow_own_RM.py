@@ -132,8 +132,8 @@ class WallFollow():
         # init parameters for steering controller    
         # self.KpS = 0.9        
         # self.KdS = 1.0    
-        self.KpS = 0.7        
-        self.KdS = 1.0    
+        self.KpS = 0.06        
+        self.KdS = 1.2    
         self.last_errorS = 0.0
         self.d_errorS = 0.0       
 
