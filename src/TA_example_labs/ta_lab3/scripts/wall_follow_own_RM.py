@@ -272,7 +272,7 @@ class WallFollow():
             errorST = self.sect_left - self.sect_right
 
             # dead band
-            if (math.fabs(errorST) > 0.001 ): 
+            if (math.fabs(errorST) > 0.1 ): 
                 errorS = errorST
             else:
                 errorS = 0            
@@ -403,9 +403,9 @@ class WallFollow():
 
             # identify the max distance for each sector
             # max distance sensed            
-            if (entries*2/10 < entry < entries*4/10):
-                #if (msg.ranges[entry] > self.sect_right):
-                self.sect_right += msg.ranges[entry]
+            if (entries*3/10 < entry < entries*4/10):
+                if (msg.ranges[entry] != float('inf')):
+                    self.sect_right += msg.ranges[entry]*0.1
 
             # center min distance sensed
             if (entries*4/10 < entry < entries*6/10):
@@ -413,9 +413,9 @@ class WallFollow():
                     self.sect_center = msg.ranges[entry]
 
             # max distance sensed
-            if (entries*6/10 < entry < entries*8/10):
-                # if (msg.ranges[entry] > self.sect_left):
-                self.sect_left += msg.ranges[entry]
+            if (entries*6/10 < entry < entries*7/10):
+                if (msg.ranges[entry] != float('inf')):
+                    self.sect_left += msg.ranges[entry]*0.1
         
 
     def viz_loop(self):
