@@ -130,7 +130,9 @@ class WallFollow():
         self.sect_right = 0  
         
         # init parameters for steering controller    
-        self.KpS = 0.9        
+        # self.KpS = 0.9        
+        # self.KdS = 1.0    
+        self.KpS = 0.7        
         self.KdS = 1.0    
         self.last_errorS = 0.0
         self.d_errorS = 0.0       
@@ -270,7 +272,7 @@ class WallFollow():
             errorST = self.sect_left - self.sect_right
 
             # dead band
-            if (math.fabs(errorST) > 0.1 ): 
+            if (math.fabs(errorST) > 0.001 ): 
                 errorS = errorST
             else:
                 errorS = 0            
@@ -282,7 +284,7 @@ class WallFollow():
             self.last_errorS = errorS    
 
             # avoid turning too sharply
-            self.control = (np.clip(control, -0.4, 0.4), controlSPEED)
+            self.control = (np.clip(control, -0.4, 0.4), SPEED)
 
     def fit_line(self):
         if self.received_data and self.xs.shape[0] > 0:
@@ -383,21 +385,37 @@ class WallFollow():
         
         for entry in range(0,entries):           
 
-            # identify the minimum distance for each sector
-            # added to wanderer: left minimum distance sensed            
-            if (entries*2/10 < entry < entries*5/10):
-                if (msg.ranges[entry] < self.sect_right):
-                    self.sect_right = msg.ranges[entry]
+            # # identify the minimum distance for each sector
+            # # added to wanderer: left minimum distance sensed            
+            # if (entries*2/10 < entry < entries*4/10):
+            #     if (msg.ranges[entry] < self.sect_right):
+            #         self.sect_right = msg.ranges[entry]
 
-            # center minimum distance sensed
+            # # center minimum distance sensed
+            # if (entries*4/10 < entry < entries*6/10):
+            #     if (msg.ranges[entry] < self.sect_center):
+            #         self.sect_center = msg.ranges[entry]
+
+            # # right minimum distance sensed
+            # if (entries*6/10 < entry < entries*8/10):
+            #     if (msg.ranges[entry] < self.sect_left):
+            #         self.sect_left = msg.ranges[entry]
+
+            # identify the max distance for each sector
+            # max distance sensed            
+            if (entries*2/10 < entry < entries*4/10):
+                #if (msg.ranges[entry] > self.sect_right):
+                self.sect_right += msg.ranges[entry]
+
+            # center min distance sensed
             if (entries*4/10 < entry < entries*6/10):
                 if (msg.ranges[entry] < self.sect_center):
                     self.sect_center = msg.ranges[entry]
 
-            # right minimum distance sensed
-            if (entries*5/10 < entry < entries*8/10):
-                if (msg.ranges[entry] < self.sect_left):
-                    self.sect_left = msg.ranges[entry]
+            # max distance sensed
+            if (entries*6/10 < entry < entries*8/10):
+                # if (msg.ranges[entry] > self.sect_left):
+                self.sect_left += msg.ranges[entry]
         
 
     def viz_loop(self):
