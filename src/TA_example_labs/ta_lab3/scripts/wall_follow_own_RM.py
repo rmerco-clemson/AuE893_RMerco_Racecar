@@ -137,6 +137,14 @@ class WallFollow():
         self.last_errorS = 0.0
         self.d_errorS = 0.0       
 
+        # from wander to avoid obstacles
+        self.sect_1 = 0
+        self.sect_2 = 0
+        self.sect_3 = 0
+        # self.ang = {0:0,001:-1.2,10:-1.2,11:-1.2,100:1.5,101:1.0,110:1.0,111:1.2}
+        self.ang = {0:0,001:-0.2,10:-0.2,11:-0.4,100:0.2,101:0.4,110:0.4,111:0.4}
+        self.fwd = {0:.25,1:0,10:0,11:0,100:0.1,101:0,110:0,111:0}
+
         #########################################
 
 
@@ -232,6 +240,15 @@ class WallFollow():
 
                 rospy.sleep(1.0/PUBLISH_RATE)
 
+
+    # from wanderer
+    def reset_sect(self):
+        '''Resets the below variables before each new scan message is read'''
+        self.sect_1 = 0
+        self.sect_2 = 0
+        self.sect_3 = 0
+
+
     # given line parameters cached in the self object, compute the pid control
     def compute_pd_control(self):
         if self.received_data:
@@ -267,6 +284,8 @@ class WallFollow():
             #     controlSPEED = 2.5
             # else: controlSPEED = 4
 
+            # from wanderer
+            sect = int(str(self.sect_1) + str(self.sect_2) + str(self.sect_3))
 
             # Calculate error for PD
             errorST = self.sect_left - self.sect_right
@@ -277,7 +296,10 @@ class WallFollow():
             else:
                 errorS = 0            
 
-            control = self.KpS * errorS + self.KdS * self.d_errorS
+            if (sect == 0):
+                control = self.KpS * errorS + self.KdS * self.d_errorS
+            else:
+                control = self.ang[sect]
             
             # error calculation
             self.d_errorS = (errorS - self.last_errorS) / PUBLISH_RATE
@@ -364,7 +386,10 @@ class WallFollow():
         self.meanRanges = np.mean(filtered_ranges)
 
         self.fit_line()
-        self.compute_pd_control()
+
+        
+        # self.compute_pd_control()
+        # self.reset_sect()
 
         # filter lidar data to clean it up and remove outlisers
         self.received_data = True
@@ -381,9 +406,16 @@ class WallFollow():
         entries = len(msg.ranges)
         self.sect_left = msg.range_max            
         self.sect_center = msg.range_max         
-        self.sect_right = msg.range_max         
+        self.sect_right = msg.range_max  
+               
         
         for entry in range(0,entries):           
+
+            # from wander
+            if 0 < msg.ranges[entry] < 0.35:
+                self.sect_1 = 1 if (0 < entry < entries/3) else 0 
+                self.sect_2 = 1 if (entries/3 < entry < entries/2) else 0
+                self.sect_3 = 1 if (entries/2 < entry < entries) else 0
 
             # # identify the minimum distance for each sector
             # # added to wanderer: left minimum distance sensed            
@@ -417,6 +449,8 @@ class WallFollow():
                 if (msg.ranges[entry] != float('inf')):
                     self.sect_left += msg.ranges[entry]*0.1
         
+        self.compute_pd_control()
+        self.reset_sect()
 
     def viz_loop(self):
         if self.received_data == True:
