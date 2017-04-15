@@ -10,9 +10,10 @@ import rospy
 import numpy as np
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
+from sensor_msgs.msg import Joy
 
 
-class turtlebot_autonomous:
+class F110_autonomous:
     ''' '''
     def __init__(self):
         # publishers and subscribers
@@ -20,7 +21,9 @@ class turtlebot_autonomous:
             '/cmd_vel', Twist, queue_size=5)
         self.laser_subscriber = rospy.Subscriber(
             "/mybot/laser/scan", LaserScan, self.laser_callback, queue_size=5)
-        self.turtlebot_laser = LaserScan()
+        self.F110_laser = LaserScan()
+        # subscribed to joystick inputs on topic "joy"
+        rospy.Subscriber("joy", Joy, self.joy_callback)
 
         # from wanderer
         self.sect_1 = 0
@@ -43,6 +46,10 @@ class turtlebot_autonomous:
 
         # control frequency
         self.control_frequency = 50
+
+        #joyData data from joystic
+        self.joyData = 0
+
         
     # reset of sectors
     def reset_sect(self):
@@ -117,7 +124,7 @@ class turtlebot_autonomous:
         vel_msg.linear.z = 0
         vel_msg.angular.x = 0
         vel_msg.angular.y = 0
-        vel_msg.angular.z = np.clip(control, -30, 30)
+        vel_msg.angular.z = 0 #np.clip(control, -30, 30)
         self.velocity_publisher.publish(vel_msg)
 
         self.reset_sect()
@@ -129,6 +136,10 @@ class turtlebot_autonomous:
         self.sort(laserscan)
         self.movement()
 
+    def joy_callback(self,data):
+
+        self.joyData = data
+
     def constrain(self, val, min_val, max_val):
         ''' Constrain val between min and max'''
         return min(max_val, max(min_val, val))
@@ -139,8 +150,8 @@ def main():
     rospy.loginfo('Task start.')
     rospy.loginfo('Init...')
 
-    turtlebot = turtlebot_autonomous()
-    rospy.init_node('racing_autonomous', anonymous=True)
+    turtlebot = F110_autonomous()
+    rospy.init_node('F110_racing_autonomous', anonymous=True)
 
     rospy.spin()
 
