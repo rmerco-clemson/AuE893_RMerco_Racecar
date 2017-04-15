@@ -20,7 +20,7 @@ class F110_autonomous:
         self.velocity_publisher = rospy.Publisher(
             '/cmd_vel', Twist, queue_size=5)
         self.laser_subscriber = rospy.Subscriber(
-            "/mybot/laser/scan", LaserScan, self.laser_callback, queue_size=5)
+            "/scan", LaserScan, self.laser_callback, queue_size=5)
         self.F110_laser = LaserScan()
         # subscribed to joystick inputs on topic "joy"
         rospy.Subscriber("joy", Joy, self.joy_callback)
@@ -106,10 +106,7 @@ class F110_autonomous:
         
         # error calculation
         self.d_errorS = (errorS - self.last_errorS) / self.control_frequency
-        self.last_errorS = errorS        
-
-        # debug
-        rospy.loginfo("Sect = " + str(sect) + " - Error: " + str(errorS) + " - Control = " + str(control))     
+        self.last_errorS = errorS         
 
         # Define vel_msg
         vel_msg = Twist()
@@ -117,7 +114,13 @@ class F110_autonomous:
         if (sect == 0):
             control = self.KpS * errorS + self.KdS * self.d_errorS
         else:
-            control = self.ang[sect]   
+            control = self.ang[sect]
+
+	#saturate the control
+	control=np.clip(control, -30, 30)
+
+	# debug
+        rospy.loginfo("Sect = " + str(sect) + " - Error: " + str(errorS) + " - Control = " + str(control))       
 
         vel_msg.linear.x = 0
         vel_msg.linear.y = 0
