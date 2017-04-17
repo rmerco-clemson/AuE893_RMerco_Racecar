@@ -39,7 +39,7 @@ class F110_autonomous:
         self.sect_right = 0  
         
         # init parameters for steering controller    
-        self.KpS = 0.06        
+        self.KpS = 1        
         self.KdS = 1.2    
         self.last_errorS = 0.0
         self.d_errorS = 0.0       
@@ -48,7 +48,8 @@ class F110_autonomous:
         self.control_frequency = 50
 
         #joyData data from joystic
-        self.joyData = 0
+	self.joyData1 = 0
+	self.joyData2 = 0
 
         
     # reset of sectors
@@ -96,7 +97,7 @@ class F110_autonomous:
         sect = int(str(self.sect_1) + str(self.sect_2) + str(self.sect_3))
 
         # Calculate error for PD
-        errorST = self.sect_left - self.sect_right
+        errorST = - self.sect_left + self.sect_right
 
         # dead band
         if (math.fabs(errorST) > 0.1 ): 
@@ -122,13 +123,15 @@ class F110_autonomous:
 	# debug
         rospy.loginfo("Sect = " + str(sect) + " - Error: " + str(errorS) + " - Control = " + str(control))       
 
-        vel_msg.linear.x = 0
+        vel_msg.linear.x = 30*self.joyData1
         vel_msg.linear.y = 0
         vel_msg.linear.z = 0
         vel_msg.angular.x = 0
         vel_msg.angular.y = 0
-        vel_msg.angular.z = 0 #np.clip(control, -30, 30)
+        vel_msg.angular.z = np.clip(control, -30, 30)
         self.velocity_publisher.publish(vel_msg)
+
+	rospy.loginfo("x = " + str(30*self.joyData1) + " - z: " + str(-30*self.joyData2))
 
         self.reset_sect()
    
@@ -141,7 +144,8 @@ class F110_autonomous:
 
     def joy_callback(self,data):
 
-        self.joyData = data
+        self.joyData1 = data.axes[1]
+        self.joyData2 = data.axes[2]
 
     def constrain(self, val, min_val, max_val):
         ''' Constrain val between min and max'''
