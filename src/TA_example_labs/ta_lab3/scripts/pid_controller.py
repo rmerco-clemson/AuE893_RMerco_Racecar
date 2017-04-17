@@ -50,7 +50,7 @@ class F110_autonomous:
         #joyData data from joystic
 	self.joyData1 = 0
 	self.joyData2 = 0
-
+	self.joybut0 = 0
         
     # reset of sectors
     def reset_sect(self):
@@ -81,7 +81,7 @@ class F110_autonomous:
                     self.sect_right += laserscan.ranges[entry]*0.1
 
             # center sector
-            if (entries*4/10 < entry < entries*6/10):
+            if (entries*29/60 < entry < entries*31/60):
                 if (laserscan.ranges[entry] < self.sect_center):
                     self.sect_center = laserscan.ranges[entry]
 
@@ -120,15 +120,34 @@ class F110_autonomous:
 	#saturate the control
 	control=np.clip(control, -30, 30)
 
-	# debug
-        rospy.loginfo("Sect = " + str(sect) + " - Error: " + str(errorS) + " - Control = " + str(control))       
+	#forward control
+	FWcontrol = 0
+	FWcontrolMaxSpeed = 22 #max speed
+	FWcontrolProp = 1.5 # threshold distance 
+	FWcontrolStop = 0.5 # threshold critical distance
+	if (self.sect_center > (FWcontrolProp+FWcontrolStop)):
+		FWcontrol = FWcontrolMaxSpeed
+	elif (self.sect_center <= (FWcontrolProp+FWcontrolStop)):
+		FWcontrol = (self.sect_center-FWcontrolStop)*FWcontrolMaxSpeed/FWcontrolProp
 
-        vel_msg.linear.x = 30*self.joyData1
+	# debug
+        rospy.loginfo("Sect = " + str(sect) + " - Error: " + str(errorS) + " - Control = " + str(control) + " - Speed = " + str(FWcontrol) + " - frontdist = " + str(self.sect_center))       
+
+        # vel_msg.linear.x = FWcontrol #30*self.joyData1
         vel_msg.linear.y = 0
         vel_msg.linear.z = 0
         vel_msg.angular.x = 0
         vel_msg.angular.y = 0
-        vel_msg.angular.z = np.clip(control, -30, 30)
+        #vel_msg.angular.z = np.clip(control, -30, 30) #30*self.joyData2
+
+	#safety override using the joystic
+	if self.joybut0 == 1:
+		vel_msg.linear.x = FWcontrol #30*self.joyData1
+		vel_msg.angular.z = np.clip(control, -30, 30) #30*self.joyData2
+	else:
+		vel_msg.linear.x = 0
+		vel_msg.angular.z = 0	
+	 
         self.velocity_publisher.publish(vel_msg)
 
 	rospy.loginfo("x = " + str(30*self.joyData1) + " - z: " + str(-30*self.joyData2))
@@ -146,6 +165,7 @@ class F110_autonomous:
 
         self.joyData1 = data.axes[1]
         self.joyData2 = data.axes[2]
+	self.joybut0 = data.buttons[0]
 
     def constrain(self, val, min_val, max_val):
         ''' Constrain val between min and max'''
